@@ -1,10 +1,13 @@
 package hr.sedamit.demo.model;
 
-import lombok.AccessLevel;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "books")
 public class Book {
@@ -16,6 +19,8 @@ public class Book {
 
     @Column(length = 2000)
     private String title;
+
+    private int publishYear;
 
     @ManyToOne
     private Author author;

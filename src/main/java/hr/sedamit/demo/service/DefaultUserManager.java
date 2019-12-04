@@ -1,9 +1,12 @@
 package hr.sedamit.demo.service;
 
 import hr.sedamit.demo.dao.UserRepository;
+import hr.sedamit.demo.dao.UserSearchFilter;
+import hr.sedamit.demo.dao.UserSpecifications;
 import hr.sedamit.demo.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +28,11 @@ public class DefaultUserManager implements UserManager {
     @Override
     public List<User> getAllUsers() {
         log.info("Listing users: " + repository.findAll());
-        return repository.findAll();
+
+        UserSearchFilter filter = new UserSearchFilter(Boolean.TRUE, 30);
+
+        Specification<User> spec = UserSpecifications.findUsers(filter);
+        return repository.findAll(spec);
     }
 
     @Override

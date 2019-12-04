@@ -1,21 +1,23 @@
 package hr.sedamit.demo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@Inheritance
+@DiscriminatorColumn(name = "USER_TYPE")
+@DiscriminatorValue("USER")
 public class User {
 
     @Id
     @GeneratedValue
-//    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PRIVATE)
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -27,6 +29,6 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
-    private transient int age;
+    private int age;
     private boolean active;
 }
