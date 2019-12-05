@@ -69,7 +69,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("{bookId}/update")
+    @PutMapping("/{bookId}/update")
     public BookDTO updateBook(@PathVariable Long bookId, @RequestBody UpdateBookCommand bookData) {
         Optional<Book> optionalBook = bookManager.getBook(bookId);
         if (!optionalBook.isPresent()) {

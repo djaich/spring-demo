@@ -60,7 +60,7 @@ public class AuthorController {
         return DTOFactory.toAuthorDTO(authorManager.save(author));
     }
 
-    @PutMapping("{authorId}/update")
+    @PutMapping("/{authorId}/update")
     public AuthorDTO updateAuthor(@PathVariable Long authorId, @RequestBody UpdateAuthorCommand authorData) {
         Optional<Author> optionalAuthor = authorManager.getAuthor(authorId);
         if (!optionalAuthor.isPresent()) {
@@ -89,6 +89,7 @@ public class AuthorController {
     private void updateAuthorData(Author author, UpdateAuthorCommand command) {
         author.setFirstName(command.getFirstName());
         author.setLastName(command.getLastName());
+        author.setNationality(command.getNationality());
         author.setYearOfBirth(command.getYearOfBirth());
     }
 

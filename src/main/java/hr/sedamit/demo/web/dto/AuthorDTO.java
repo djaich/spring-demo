@@ -12,5 +12,6 @@ public class AuthorDTO {
     private Long id;
     private String firstName;
     private String lastName;
+    private String nationality;
     private int yearOfBirth;
 }

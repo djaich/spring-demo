@@ -3,6 +3,8 @@ package hr.sedamit.demo.service;
 import hr.sedamit.demo.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -43,7 +45,8 @@ public class DummyUserManager implements UserManager {
                     user.getPassword(),
                     user.getFullName(),
                     user.getAge(),
-                    user.isActive()
+                    user.isActive(),
+                    user.getRole()
             );
             log.info("User saved: " + user.getUserName());
             allUsers.put(id, newUser);
@@ -65,5 +68,17 @@ public class DummyUserManager implements UserManager {
     @PostConstruct
     public void init() {
         log.info("Dummy user manager ready");
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> optionalUser = allUsers.values().stream()
+                .filter(user -> user.getUsername().equals(username)).findFirst();
+
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new UsernameNotFoundException("No user with such name");
+        }
     }
 }

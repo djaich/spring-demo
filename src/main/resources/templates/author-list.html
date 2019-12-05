@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Authors</title>
 </head>
 <body>
-
 <table>
-    <!--/*@thymesVar id="authors" type="java.util.List<hr.sedamit.demo.model.Author>"*/-->
     <tr th:each="author : ${authors}">
-        <td class="eew" th:text="${author.firstName + ' ' + author.lastName}"> FullName</td>
+        <td>
+            <a th:href="@{/gui/author/{aId}/edit(aId=${author.id})}"
+               th:text="${author.firstName} + ' ' + ${author.firstName}">
+            </a>
+            <!-- 			<td th:text="${author.firstName} + ' ' + ${author.firstName}" >FirstName</td> -->
+        </td>
     </tr>
 </table>
-
+<div>
+    <a th:href="@{/gui/author/0/edit}">
+        <button class="btn btn-primary" type="submit">Add author</button>
+    </a>
+</div>
 </body>
 </html>
+
+

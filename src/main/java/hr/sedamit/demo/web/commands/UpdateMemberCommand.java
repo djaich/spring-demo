@@ -10,7 +10,10 @@ public class UpdateMemberCommand extends UpdateUserCommand {
 
     private AddressDTO address;
 
-    public UpdateMemberCommand(String memberId, AddressDTO address) {
+    public UpdateMemberCommand(String userName, String password, String fullName, int age, boolean active, Long roleId,
+                               String memberId, AddressDTO address
+    ) {
+        super(userName, password, fullName, age, active, roleId);
         this.memberId = memberId;
         this.address = address;
     }

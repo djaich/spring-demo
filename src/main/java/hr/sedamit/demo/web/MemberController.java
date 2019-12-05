@@ -63,7 +63,7 @@ public class MemberController {
         return DTOFactory.toMemberDTO(memberManager.save(member));
     }
 
-    @PutMapping("{memberId}/update")
+    @PutMapping("/{memberId}/update")
     public MemberDTO updateMember(@PathVariable Long memberId, @RequestBody UpdateMemberCommand memberData) {
         Optional<Member> optionalMember = memberManager.getMember(memberId);
         if (!optionalMember.isPresent()) {

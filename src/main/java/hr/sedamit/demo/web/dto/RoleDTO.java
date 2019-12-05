@@ -1,23 +1,24 @@
 package hr.sedamit.demo.web.dto;
 
+import hr.sedamit.demo.model.Permission;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class RoleDTO {
 
     private Long id;
 
-    private String userName;
+    private String name;
 
-    private String fullName;
+    private List<Permission> permissions;
 
-    private transient int age;
 
-    private boolean active;
-
-    private RoleDTO role;
 }

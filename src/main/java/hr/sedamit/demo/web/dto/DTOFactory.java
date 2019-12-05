@@ -14,7 +14,8 @@ public class DTOFactory {
                 user.getUserName(),
                 user.getFullName(),
                 user.getAge(),
-                user.isActive()
+                user.isActive(),
+                toRoleDTO(user.getRole())
         );
     }
 
@@ -27,6 +28,7 @@ public class DTOFactory {
                 author.getId(),
                 author.getFirstName(),
                 author.getLastName(),
+                author.getNationality(),
                 author.getYearOfBirth()
         );
     }
@@ -56,6 +58,18 @@ public class DTOFactory {
         );
     }
 
+    public static RoleDTO toRoleDTO(Role role) {
+        if (role == null) {
+            return null;
+        }
+
+        return new RoleDTO(
+                role.getId(),
+                role.getName(),
+                role.getPermissions()
+        );
+    }
+
     public static MemberDTO toMemberDTO(Member member) {
         if (member == null) {
             return null;
@@ -68,7 +82,8 @@ public class DTOFactory {
                 member.getAge(),
                 member.isActive(),
                 member.getMemberId(),
-                toAddressDTO(member.getAddress())
+                toAddressDTO(member.getAddress()),
+                toRoleDTO(member.getRole())
         );
     }
 

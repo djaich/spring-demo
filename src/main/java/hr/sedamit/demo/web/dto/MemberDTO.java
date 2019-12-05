@@ -13,8 +13,10 @@ public class MemberDTO extends UserDTO {
 
     private AddressDTO address;
 
-    public MemberDTO(Long id, String userName, String fullName, int age, boolean active, String memberId, AddressDTO address) {
-        super(id, userName, fullName, age, active);
+    public MemberDTO(Long id, String userName, String fullName, int age, boolean active,
+                     String memberId, AddressDTO address,
+                     RoleDTO roleDTO) {
+        super(id, userName, fullName, age, active, roleDTO);
         this.memberId = memberId;
         this.address = address;
     }
