@@ -7,14 +7,15 @@ import hr.sedamit.demo.web.dto.AuthorDTO;
 import hr.sedamit.demo.web.dto.DTOFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/author")
@@ -31,13 +32,11 @@ public class AuthorController {
     }
 
     @GetMapping(value = "/list")
-    public List<AuthorDTO> listAllAuthors() {
+    public Page<AuthorDTO> listAllAuthors(@PageableDefault(size = 20) Pageable pageable) {
 
         if (allowedListAuthors) {
-            final List<Author> allAuthors = authorManager.getAllAuthors();
-            return allAuthors.stream()
-                    .map(DTOFactory::toAuthorDTO)
-                    .collect(Collectors.toList());
+            final Page<Author> allAuthors = authorManager.getAllAuthors(pageable);
+            return allAuthors.map(DTOFactory::toAuthorDTO);
         } else {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Author list not allowed!");
         }
